@@ -10,7 +10,19 @@ export function TOKEN_POST(body) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(),
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function TOKEN_VALIDATE_POST(body) {
+  return {
+    url: API_URL + '/jwt-auth/v1/token',
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer' + token,
+      },
     },
   };
 }
