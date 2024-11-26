@@ -17,7 +17,7 @@ export function TOKEN_POST(body) {
 
 export function TOKEN_VALIDATE_POST(token) {
   return {
-    url: API_URL + '/jwt-auth/v1/token',
+    url: API_URL + '/jwt-auth/v1/token/validate',
     options: {
       method: 'POST',
       headers: {
@@ -47,7 +47,7 @@ export function USER_POST(body) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(),
+      body: JSON.stringify(body),
     },
   };
 }
