@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import MinhasFotos from '../../Assets/feed.svg?react';
 import Estatisticas from '../../Assets/estatisticas.svg?react';
@@ -10,6 +10,12 @@ import styles from './UserHeaderNav.module.css';
 const UserHeaderNav = () => {
   const [mobile, setMobile] = React.useState(null);
   const { userLogout } = React.useContext(UserContext);
+  const navigate = useNavigate();
+
+  function HandleLogout() {
+    userLogout();
+    navigate('/login');
+  }
 
   return (
     <nav className={styles.nav}>
@@ -25,7 +31,7 @@ const UserHeaderNav = () => {
         <AdicionarFoto />
         {mobile && 'AdicionarFoto'}
       </NavLink>
-      <button onClick={userLogout}>
+      <button onClick={HandleLogout}>
         <Sair />
         {mobile && 'Sair'}
       </button>
