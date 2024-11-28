@@ -1,14 +1,16 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import MinhasFotos from '../../Assets/feed.svg?react';
 import Estatisticas from '../../Assets/estatisticas.svg?react';
 import AdicionarFoto from '../../Assets/adicionar.svg?react';
 import Sair from '../../Assets/sair.svg?react';
 import styles from './UserHeaderNav.module.css';
+import useMedia from '../../Hooks/useMedia';
 
 const UserHeaderNav = () => {
-  const [mobile, setMobile] = React.useState(null);
+  const [mobileMenu, setMobileMenu] = React.useState(false);
+  const mobile = useMedia('(max-width: 40rem )');
   const { userLogout } = React.useContext(UserContext);
   const navigate = useNavigate();
 
@@ -17,25 +19,45 @@ const UserHeaderNav = () => {
     navigate('/login');
   }
 
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    setMobileMenu(false);
+  }, [pathname]);
+
   return (
-    <nav className={styles.nav}>
-      <NavLink to="/conta" end>
-        <MinhasFotos />
-        {mobile && 'Minhas Fotos'}
-      </NavLink>
-      <NavLink to="/conta/estatisticas">
-        <Estatisticas />
-        {mobile && 'Estatisticas'}
-      </NavLink>
-      <NavLink to="/conta/postar">
-        <AdicionarFoto />
-        {mobile && 'AdicionarFoto'}
-      </NavLink>
-      <button onClick={HandleLogout}>
-        <Sair />
-        {mobile && 'Sair'}
-      </button>
-    </nav>
+    <>
+      {mobile && (
+        <button
+          aria-label="Menu"
+          className={`${styles.mobileButton} ${
+            mobileMenu && styles.mobileButtonActive
+          }`}
+          onClick={() => setMobileMenu(!mobileMenu)}
+        ></button>
+      )}
+      <nav
+        className={`${mobile ? styles.navMobile : styles.nav} ${
+          mobileMenu && styles.navMobileActive
+        }`}
+      >
+        <NavLink to="/conta" end>
+          <MinhasFotos />
+          {mobile && 'Minhas Fotos'}
+        </NavLink>
+        <NavLink to="/conta/estatisticas">
+          <Estatisticas />
+          {mobile && 'Estatisticas'}
+        </NavLink>
+        <NavLink to="/conta/postar">
+          <AdicionarFoto />
+          {mobile && 'AdicionarFoto'}
+        </NavLink>
+        <button onClick={HandleLogout}>
+          <Sair />
+          {mobile && 'Sair'}
+        </button>
+      </nav>
+    </>
   );
 };
 
