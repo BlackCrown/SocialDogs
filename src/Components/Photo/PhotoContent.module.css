@@ -33,11 +33,17 @@
 
 @media (max-width: 64rem) {
   .photo{
+    display: block;
     height: auto;
     max-height: calc(100vh - 4rem);
     overflow: auto;
     grid-template-columns: minmax(20rem, 40rem);
   }
+
+  .details{
+    padding: .5rem 1rem 0px 1rem;
+  }
+
 }
 
 .author{
@@ -50,6 +56,7 @@
 
 .author a:hover{
   text-decoration: underline;
+  color: #fb1;
 }
 
 .vizualizacoes::before{
