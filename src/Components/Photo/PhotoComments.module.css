@@ -6,6 +6,11 @@
   box-shadow: 1px -4px 11px -8px #333;
 }
 
+.single.comments{
+  padding: 0px;
+}
+
+
 .comments li{
   margin-bottom:  .5rem;
   margin-top: .5rem;
