@@ -1,6 +1,7 @@
 import React from 'react';
 import FeedModal from './FeedModal';
 import FeedPhotos from './FeedPhotos';
+import PropTypes from 'prop-types';
 
 const Feed = ({ user }) => {
   const [modalPhoto, setModalPhoto] = React.useState(null);
@@ -49,6 +50,15 @@ const Feed = ({ user }) => {
       ))}
     </div>
   );
+};
+Feed.defalutProps = {
+  user: 0,
+};
+Feed.propTyps = {
+  user: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired,
+  ]).isRequired,
 };
 
 export default Feed;
