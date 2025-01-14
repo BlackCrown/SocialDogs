@@ -39,7 +39,7 @@ const LoginForm = () => {
             <Button>Logar</Button>
           )}
           <Error error={error} />
-          {error && <p>{error}</p>}
+          {error && <p>{error && 'Dados incorretos'}</p>}
         </fieldset>
       </form>
       <Link className={styles.perdeu} to="/login/perdeu">
