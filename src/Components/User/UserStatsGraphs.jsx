@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './UserStatsGraphs.module.css';
-import { VictoryPie, VictoryChart, VictoryBar } from 'victory';
+import {
+  VictoryTheme,
+  VictoryTooltip,
+  VictoryPie,
+  VictoryChart,
+  VictoryBar,
+} from 'victory';
 
 const UserStatsGraphs = ({ data }) => {
   const [graph, setGraph] = React.useState([]);
@@ -20,11 +26,34 @@ const UserStatsGraphs = ({ data }) => {
   }, [data]);
   return (
     <div className={`${styles.graph} animeLeft`}>
-      <div className={styles.total}>
+      <div className={`${styles.total} ${styles.graphItem}`}>
         <p>Acessos: {total}</p>
       </div>
-      <div>
-        <VictoryPie data={graph} />
+      <div className={styles.graphItem}>
+        <VictoryPie
+          data={graph}
+          theme={VictoryTheme.clean}
+          innerRadius={40}
+          cornerRadius={6}
+          labelComponent={<VictoryTooltip />}
+          padding={{ top: 20, bottom: 20, left: 80, right: 80 }}
+          style={{
+            data: {
+              fillOpacity: 0.9,
+              stroke: '#fff',
+              strokeWidth: 2,
+            },
+            labels: {
+              fontSize: 14,
+              fill: '#333',
+            },
+          }}
+        />
+      </div>
+      <div className={styles.graphItem}>
+        <VictoryChart>
+          <VictoryBar alignment="start" data={graph} />
+        </VictoryChart>
       </div>
     </div>
   );
