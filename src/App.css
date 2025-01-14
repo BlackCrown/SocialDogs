@@ -76,6 +76,16 @@ z-index: -1;
   animation: animeLeft .3s forwards;
 }
 
+.App{
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 4rem);
+}
+
+.AppBody{
+  flex: 1;
+}
+
 @keyframes animeLeft {
   to{
     opacity: 1;
